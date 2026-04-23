@@ -1,0 +1,23 @@
+{
+  "tasks": [
+    {
+      "id": 2,
+      "title": "Buy Groceries",
+      "priority": "High",
+      "description": "",
+      "dueDate": "2026-03-06",
+      "isDone": 1,
+      "createdAt": "2026-03-06T08:34:24.049Z"
+    },
+    {
+      "id": 4,
+      "title": "Complete DBMS Assignment",
+      "priority": "Medium",
+      "description": "",
+      "dueDate": "2026-03-07",
+      "isDone": 0,
+      "createdAt": "2026-03-06T08:39:54.828Z"
+    }
+  ],
+  "nextId": 5
+}

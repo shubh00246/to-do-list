@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My To-Do List</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <main class="container">
+
+    <header class="header">
+      <div class="header-tag">TASK MANAGER v1.0</div>
+      <h1 class="title">My To-Do<br/><span class="accent">List.</span></h1>
+      <div class="counter-strip">
+        <div class="counter-item">
+          <span class="counter-num" id="totalCount">0</span>
+          <span class="counter-label">Total</span>
+        </div>
+        <div class="divider-v"></div>
+        <div class="counter-item">
+          <span class="counter-num" id="doneCount">0</span>
+          <span class="counter-label">Done</span>
+        </div>
+        <div class="divider-v"></div>
+        <div class="counter-item">
+          <span class="counter-num" id="activeCount">0</span>
+          <span class="counter-label">Active</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="add-section">
+      <div class="input-row">
+        <input type="text" id="taskTitle" class="input-field" placeholder="Add a new task..." maxlength="50" autocomplete="off"/>
+        <select id="taskPriority" class="select-field">
+          <option value="Low">Low</option>
+          <option value="Medium" selected>Medium</option>
+          <option value="High">High</option>
+        </select>
+      </div>
+      <textarea id="taskDesc" class="textarea-field" placeholder="Description (optional)" rows="2" maxlength="200"></textarea>
+      <div class="action-row">
+        <input type="date" id="taskDue" class="date-field" />
+        <button id="addBtn" class="btn btn-add" onclick="addTask()">+ Add Task</button>
+      </div>
+      <div class="search-row">
+        <input type="text" id="searchInput" class="input-field search-input" placeholder="🔍 Search tasks..." oninput="renderTasks()" />
+        <select id="sortSelect" class="select-field" onchange="renderTasks()">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="priority">By Priority</option>
+        </select>
+      </div>
+      <p class="error-msg" id="errorMsg"></p>
+    </section>
+
+    <section class="filter-section">
+      <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">All</button>
+      <button class="filter-btn" data-filter="active" onclick="setFilter('active', this)">Active</button>
+      <button class="filter-btn" data-filter="completed" onclick="setFilter('completed', this)">Completed</button>
+      <button class="filter-btn export-btn" onclick="exportJSON()">Export JSON</button>
+    </section>
+
+    <section class="task-list" id="taskList">
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">✦</div>
+        <p>No tasks yet. Add one above!</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Edit Modal -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <h2 class="modal-title">Edit Task</h2>
+      <input type="text" id="editTitle" class="input-field" placeholder="Task title" maxlength="50"/>
+      <textarea id="editDesc" class="textarea-field" placeholder="Description" rows="2" maxlength="200"></textarea>
+      <select id="editPriority" class="select-field">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+      <input type="date" id="editDue" class="date-field" style="width:100%;margin-top:10px;"/>
+      <p class="error-msg" id="editErrorMsg"></p>
+      <div class="modal-actions">
+        <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-save" onclick="saveEdit()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
